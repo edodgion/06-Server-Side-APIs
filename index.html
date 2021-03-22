@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+  <link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+  crossorigin="anonymous"
+/>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css">
   <title>Project Tracker</title>
@@ -30,20 +36,25 @@
            Search for a City:
           </h3>
           <div class="card-body">
-            <input class="enter-city"></input>
+            <input class="enter-city"></input><button><i class="fas fa-search"></i></button>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Project Name</li>
-            <li class="list-group-item">Project Type</li>
-            <li class="list-group-item">Due Date</li>
-            <li class="list-group-item">Hourly Rate</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
+            <li class="city" data-city="">City Name</li>
           </ul>
         </div>
       </section>
 
       <section class="col-12 col-md-8 col-lg-9">
-        <div class="table-responsive">
+        <div class="forcast">
           <table class="table table-bordered custom-table">
+            <h1>5 Day forcast</h1>
             <thead>
               <tr>
                 <th scope="col"></th>

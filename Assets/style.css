@@ -8,3 +8,11 @@
   color: var(--light);
 }
 
+input {
+width: 86%;
+}
+ 
+button {
+  background-color: rgb(7, 137, 243);
+  color: aliceblue;
+}
