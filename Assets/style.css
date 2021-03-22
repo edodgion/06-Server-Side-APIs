@@ -1,0 +1,10 @@
+:root {
+  --gray: #444444;
+  
+}
+
+.custom-jumbotron {
+  background-color: var(--gray);
+  color: var(--light);
+}
+
