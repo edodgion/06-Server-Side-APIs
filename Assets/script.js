@@ -86,8 +86,8 @@ function printForecastResults(forecastResults){
     
 }
 
-function printEventResults (eventResults){
-    console.log(eventResults);
+function printWeathertResults (weatherResults){
+    console.log(weatherResults);
 	}	
 
   button.addEventListener('click', handleSearchFormSubmit);
