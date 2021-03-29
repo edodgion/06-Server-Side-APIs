@@ -1,5 +1,6 @@
 :root {
   --gray: #444444;
+  --white:  aliceblue;
   
 }
 
@@ -14,10 +15,17 @@ width: 86%;
  
 button {
   background-color: rgb(7, 137, 243);
-  color: aliceblue;
+  color: var(--white);
 }
 
 
 .list-group-item {
   list-style-type: none;
+}
+
+.currentWeather, p {
+  background-color: var(--gray);
+  color: var(--white);
+  width: 25%;
+
 }
