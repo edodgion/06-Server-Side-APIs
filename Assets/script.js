@@ -1,70 +1,78 @@
-var searchBtn = $(".searchBtn")
-var cityInput = document.querySelector(".enter-city")
-//var query = searchParamsArr[0].split('=').pop();
-//var format = searchParamsArr[1].split('=').pop();
-//API Key goes here
-//var format = searchParamsArr[1].split('=').pop();
-var apiKey = "f53b75435ff33a915bd8f6e209086b78";
+var input = document.querySelector("#enterCity");
+var button = document.querySelector("#searchBtn");
 
-for(var i = 0; i < localStorage.lenth; i++) {
-  var city = localStorage.getItem(i);
-  var displayCity = $(".list-group").addClass(".list-group-item")
 
-  displayCity.append("<li>" + city + "</li>")
-};
+var apiKey = "3d440218342a493796fb55b92661ecc1";
 
-var keyCount = 0;
+function handleSearchFormSubmit (event) {
+	event.preventDefault();
+console.log('works');
 
-searchBtn.on("click", function(event){
-event.preventDefault(); 
-  var enterCity = cityInput.value;
-  localStorage.setItem(enterCity);
+var searchInputVal = document.querySelector('#enterCity').value;
 
-//Fetch 1  Current Weather
-fetch("http://api.openweathermap.org/data/2.5/weather?q=" + enterCity + "&appid=f53b75435ff33a915bd8f6e209086b78")
-.then(function (response) {
-  var displayCity = $(".list-group").addClass("list-group-item")
-  displayCity.append("<li>" + response.name + "</li>")
+    if (!searchInputVal) {
+        window.alert('Please enter a City to search for...')
+    }
 
-localStorage.setItem(keyCount, response.name)
-  keyCount = keyCount + 1;
+    getParams()
+}
 
-// Start Current Weather append 
-var currentCard = $(".currentCard").append("<div>").addClass("card-body");
-currentCard.empty();
-var currentName = currentCard.append("<p>");
-// .addClass("card-text");
-currentCard.append(currentName);
+function getParams (search){
+    var search = input.value;
+    console.log(search);
 
-// Adjust Date 
-var timeUTC = new Date(response.dt * 1000);
-currentName.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
-//currentName.append(`<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">`);
-// Add Temp 
-var currentTemp = currentName.append("<p>");
-// .addClass("card-text");
-currentName.append(currentTemp);
-currentTemp.append("<p>" + "Temperature: " + response.main.temp + "</p>");
-// Add Humidity
-currentTemp.append("<p>" + "Humidity: " + response.main.humidity + "%" + "</p>");
-// // Add Wind Speed: 
-currentTemp.append("<p>" + "Wind Speed: " + response.wind.speed + "</p>");
+    getCurrentWeather(search);
+    getfiveDayForcast(search);
+}
 
-// UV Index URL
-var urlUV = `https://api.openweathermap.org/data/2.5/uvi?appid=b8ecb570e32c2e5042581abd004b71bb&lat=${response.coord.lat}&lon=${response.coord.lon}`;
 
-// UV Index
-$.ajax({
-    url: urlUV,
-    method: "GET"
-}).then(function (response) {
+function getCurrentWeather(search) {
+  var urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + (search) + "&appid=" + (apiKey);
 
-    var currentUV = currentTemp.append("<p>" + "UV Index: " + response.value + "</p>").addClass("card-text");
-    currentUV.addClass("UV");
-    currentTemp.append(currentUV);
-    // currentUV.append("UV Index: " + response.value);
+    fetch(urlCurrent)
+    .then(function (response) {
+    console.log(response.ok);
+    if (!response.ok) {
+        window.alert('Unable to connect');
+        throw response.json();
+}
 
-  });
-});
-});
+return response.json()
+})
+    .then(function (weatherResults){
+        printWeatherResults(weatherResults);
+    })
 
+}
+
+function getfiveDayForcast(search) {
+  var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + (search) + "&appid=" + (apiKey);
+
+    fetch(urlFiveDay)
+    .then(function (response) {
+    console.log(response.ok);
+    if (!response.ok) {
+        window.alert('Unable to connect');
+        throw response.json();
+}
+
+return response.json()
+})
+    .then(function (forecastResults){
+        printForecastResults(forecastResults);
+    })
+
+}
+
+function printForecastResults(forecastResults){
+    console.log(forecastResults);
+    var forecast = document.querySelector('.5dayForcast');
+    forecast.innerText = weatherResults.forecast[0].city.value;
+    
+}
+
+function printEventResults (eventResults){
+    console.log(eventResults);
+	}	
+
+  button.addEventListener('submit', handleSearchFormSubmit);
