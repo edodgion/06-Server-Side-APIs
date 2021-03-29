@@ -4,9 +4,19 @@ var button = document.querySelector("#searchBtn");
 
 var apiKey = "3d440218342a493796fb55b92661ecc1";
 
+for (var i = 0; i < localStorage.length; i++) {
+
+  var city = localStorage.getItem(i);
+  // console.log(localStorage.getItem("City"));
+  var cityName = $(".list-group").addClass("list-group-item");
+
+  cityName.append("<li>" + city + "</li>");
+}
+
+var keyCount = 0;
+
 function handleSearchFormSubmit (event) {
 	event.preventDefault();
-console.log('works');
 
 var searchInputVal = document.querySelector('#enterCity').value;
 
@@ -32,6 +42,11 @@ function getCurrentWeather(search) {
     fetch(urlCurrent)
     .then(function (response) {
     console.log(response.ok);
+    var cityName = $(".list-group").addClass("list-group-item");
+    cityName.append("<li>" + input.value + "</li>");
+    localStorage.setItem(keyCount, input.value);
+    keyCount = keyCount + 1;
+
     if (!response.ok) {
         window.alert('Unable to connect');
         throw response.json();
@@ -67,7 +82,7 @@ return response.json()
 function printForecastResults(forecastResults){
     console.log(forecastResults);
     var forecast = document.querySelector('.5dayForcast');
-    forecast.innerText = weatherResults.forecast[0].city.value;
+    forecast.innerText = urlFiveDay.forecast[0].city.value;
     
 }
 
@@ -75,4 +90,4 @@ function printEventResults (eventResults){
     console.log(eventResults);
 	}	
 
-  button.addEventListener('submit', handleSearchFormSubmit);
+  button.addEventListener('click', handleSearchFormSubmit);
