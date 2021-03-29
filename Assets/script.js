@@ -9,8 +9,6 @@ for (var i = 0; i < localStorage.length; i++) {
   cityName.append("<li>" + city + "</li>");
 }
 
-var keyCount = 0;
-
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
@@ -39,8 +37,8 @@ function getCurrentWeather(search) {
       console.log(response.ok);
       var cityName = $(".list-group").addClass("list-group-item");
       cityName.append("<li>" + input.value + "</li>");
-      localStorage.setItem(keyCount, input.value);
-      keyCount = keyCount + 1;
+      localStorage.setItem(i, input.value);
+  
 
       if (!response.ok) {
         throw response.json();
@@ -50,23 +48,19 @@ function getCurrentWeather(search) {
 
     .then(function printWeatherResults(response) {
       var currentWeather = $(".weatherResults")
-        .addClass(".currentWeather")
+        .addClass(".card-body")
         .append("<div>");
       currentWeather.empty();
       var weatherResults = currentWeather.append("<p>");
       currentWeather.append(weatherResults);
 
       var time = new Date(response.dt * 1000);
-      weatherResults.append(
-        "<p>" + response.name + " " + time.toLocaleDateString("en-US") + "<p>"
-      );
+      weatherResults.append("<div class=currentWeather>" + "<p>" + response.name + " " + time.toLocaleDateString("en-US") + "<p>" + `<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">` + 
+      "<p>" + "Temperature: " + response.main.temp + " C°" + "</p>" + 
+      "<p>" + "Humidity: " + response.main.humidity + "%" + "</p>" + 
+      "<p>" + "Wind Speed: " + response.wind.speed + "</p>" + "</div>");
       var temp = weatherResults.append("<p>");
       weatherResults.append(temp);
-      temp.append(
-        "<p>" + "Temperature: " + response.main.temp + " C°" + "</p>"
-      );
-      temp.append("<p>" + "Humidity: " + response.main.humidity + "%" + "</p>");
-      temp.append("<p>" + "Wind Speed: " + response.wind.speed + "</p>");
     });
 }
 
