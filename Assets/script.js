@@ -48,15 +48,30 @@ function getCurrentWeather(search) {
     keyCount = keyCount + 1;
 
     if (!response.ok) {
-        window.alert('Unable to connect');
-        throw response.json();
+      throw response.json();
 }
-
 return response.json()
-})
-    .then(function (weatherResults){
-        printWeatherResults(weatherResults);
+
+  })
+
+  .then(function printWeatherResults(response) {
+    var currentWeather = $(".weatherResults").append("<div>").addClass(".card-body");
+    currentWeather.empty();
+    var weatherResults = currentWeather.append("<p>");
+    currentWeather.append(weatherResults);
+
+     
+            var time = new Date(response.dt * 1000);
+            weatherResults.append(response.name + " " + time.toLocaleDateString("en-US"));
+           
+            var temp = weatherResults.append("<p>");
+            
+            weatherResults.append(temp);
+            temp.append("<p>" + "Temperature: " + response.main.temp + "</p>");
+            temp.append("<p>" + "Humidity: " + response.main.humidity + "%" + "</p>");
+            temp.append("<p>" + "Wind Speed: " + response.wind.speed + "</p>");
     })
+
 
 }
 
@@ -67,27 +82,21 @@ function getfiveDayForcast(search) {
     .then(function (response) {
     console.log(response.ok);
     if (!response.ok) {
-        window.alert('Unable to connect');
         throw response.json();
 }
 
 return response.json()
 })
-    .then(function (forecastResults){
-        printForecastResults(forecastResults);
+    .then(function printForecastResults(forecastResults){
+      console.log(forecastResults);
+      var forecast = $(".5dayForecast").append("<div>").addClass(".card-body");
+      forecast.empty();
+      var currentForecast = forecast.append("<p>");
+    // .addClass("card-text");
+    forecast.append(currentForecast);
+      
+  
     })
-
-}
-
-function printForecastResults(forecastResults){
-    console.log(forecastResults);
-    var forecast = document.querySelector('.5dayForcast');
-    forecast.innerText = urlFiveDay.forecast[0].city.value;
-    
-}
-
-function printWeathertResults (weatherResults){
-    console.log(weatherResults);
-	}	
+  }
 
   button.addEventListener('click', handleSearchFormSubmit);
