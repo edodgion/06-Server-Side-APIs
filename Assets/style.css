@@ -24,6 +24,17 @@ button {
   list-style-type: none;
 }
 
+li:hover {
+  background-color: rgb(66, 66, 66);
+  color: var(--white);
+  width: 20%;
+  cursor: pointer;
+  opacity: 0.5;
+  text-align: center;
+  border-radius: 5px;
+}
+
+
 .currentWeather {
   background-color: var(--blue);
   color: var(--white);
@@ -32,4 +43,15 @@ button {
   border-radius: 10px;
   box-shadow: 5px 5px 10px black;
 
+}
+
+.fiveDayForecast {
+  display: inline-block;
+  background-color: var(--blue);
+  color: var(--white);
+  width: 13%;
+  padding: 30px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px black;
 }

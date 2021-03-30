@@ -21,7 +21,7 @@ https://edodgion.github.io/06-Server-Side-APIs
 # What it should look like
 ![](./Assets/06-server-side-apis-homework-demo.png)
 
-# Screen Shots
-![](./Assets/weather-screenshot.jpg)
+# What it looks like
+![](./Assets/weather.jpg)
 
 
